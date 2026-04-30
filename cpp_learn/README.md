@@ -305,6 +305,24 @@ cd ..
 ./build/main.exe
 ```
 
+
+### 1.2.4 库类型
+
+- STATIC
+  - `.lib` (Windows)
+  - `.a` (Linux/MinGW)
+  - 代码复制进 exe
+  - 文件更大
+  - 不需要额外 dll
+- SHARED
+  - 代码运行时加载
+  - 文件更小
+  - 需要带 `dll` 文件
+- MODULE
+  - `.dll` (Windows)
+  - `.so` (Linux)
+  - 运行时动态加载（插件）
+
 ## 1.3 gtest测试框架
 
 
