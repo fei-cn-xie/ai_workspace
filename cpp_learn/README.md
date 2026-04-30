@@ -349,14 +349,16 @@ cmake ..
 make # 可以看到生成了libgtest.a等内容
 
 # # 执行测试用例 任选其一
-# 方式一
+# 方式一 # 需要 cpp_learn/CMakeLists.txt中添加 enable_testing()， 
+# cpp_learn/test/CMakeLists.txt中添加add_test(NAME test_hello COMMAND test_hello)
 ctest 
 
-# 方式二
+# 方式二 # 需要 cpp_learn/CMakeLists.txt中添加 enable_testing()， 
+# cpp_learn/test/CMakeLists.txt中添加add_test(NAME test_hello COMMAND test_hello)
 make test 
 
 # 方式三
-# 找到cpp_learn/build/test/test_hello.exe文件执行
+# 找到cpp_learn/build/test/test_hello.exe文件执行 
 ./test/test_hello.exe
 ```
 
