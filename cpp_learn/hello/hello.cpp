@@ -5,3 +5,7 @@ int Hello() { // 定义Hello函数
     std::cout << "Hello" << std::endl; // 输出Hello并换行
     return 0; // 返回0表示函数执行成功
 }
+
+int Hello_Fei() {
+    return 152;
+}

@@ -348,8 +348,16 @@ cd build
 cmake ..
 make # 可以看到生成了libgtest.a等内容
 
-# # 执行测试用例
-# ctest # 或者make test 
+# # 执行测试用例 任选其一
+# 方式一
+ctest 
+
+# 方式二
+make test 
+
+# 方式三
+# 找到cpp_learn/build/test/test_hello.exe文件执行
+./test/test_hello.exe
 ```
 
 
