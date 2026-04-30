@@ -6,6 +6,6 @@
 int main() {
     Hello();
     World();
-    std::cout << "执行完毕A" << std::endl;
+    std::cout << "Done A" << std::endl;
     return 0;
 }
