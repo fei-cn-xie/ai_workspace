@@ -347,7 +347,12 @@ cd ..
 cd build
 cmake ..
 make # 可以看到生成了libgtest.a等内容
+
+# # 执行测试用例
+# ctest # 或者make test 
 ```
+
+
 
 
 
