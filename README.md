@@ -17,4 +17,13 @@ rm -rf env
 
 ```
 
-## 
+## Git相关
+
+### git tag
+```sh
+git tag -a tag_name -m "tag 相关信息"
+
+git push origin --tags
+
+```
+

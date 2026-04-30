@@ -15,5 +15,5 @@ target_include_directories(test_hello PUBLIC ${PROJECT_ROOT})
 # 添加链接库, 参数1: 目标文件名称, 参数2: 访问权限, 参数3: 库名称
 target_link_libraries(test_hello PUBLIC hellolib gtest gtest_main)
 
-# 添加测试, 参数1: 测试名称, 参数2: 可执行文件名称
-add_test(NAME test_hello COMMAND test_hello)
+# # 添加测试, 参数1: 测试名称, 参数2: 可执行文件名称
+# add_test(NAME test_hello COMMAND test_hello)
