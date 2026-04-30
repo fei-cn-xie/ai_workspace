@@ -10,6 +10,7 @@ add_subdirectory(world)
 
 
 
+
 # 添加可执行文件, 参数1: 可执行文件名称, 参数2: 需要编译的源文件
 add_executable(main main.cpp)
 
@@ -21,3 +22,6 @@ target_include_directories(main PUBLIC world)
 # 添加链接库, 参数1: 目标文件名称, 参数2: 访问权限, 参数3: 库名称
 target_link_libraries(main PUBLIC hellolib)
 target_link_libraries(main PUBLIC worldlib) 
+
+# 将 gtest 添加到项目中
+add_subdirectory(thirdpart/googletest-1.17.0)

@@ -332,7 +332,22 @@ cd ..
 > 例如:项目选代过程中，常常会出现修复一个bug，又引入了多个bug的情况，如果此时对应的api有完整的测试用例，则可以提前暴露解决上述bug。一个优秀的开发，必定也是一个好的测试。
 
 > https://ggdocs.cn/googletest/primer.html
-> 
+> https://github.com/google/googletest/releases/tag/v1.17.0
+
+
+
+
+### 1.3.1 入门
+
+```sh
+# 1. 下载源码
+# 2. 将源码放在thirdpart目录下
+# 3. 将gtest添加到项目中，CMakeLists.txt
+# 
+cd build
+cmake ..
+make # 可以看到生成了libgtest.a等内容
+```
 
 
 
