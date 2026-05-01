@@ -1,0 +1,4 @@
+{
+    // 设置C++编译器路径, 这里设置为g++.exe, 需要确保该路径下可以找到g++.exe编译器
+    "C_Cpp.default.compilerPath": "g++.exe"
+}

@@ -6,6 +6,7 @@
 int main() {
     Hello();
     World();
+    int a = 10;
     std::cout << "Done A" << std::endl;
     return 0;
 }

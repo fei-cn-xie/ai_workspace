@@ -7,6 +7,14 @@ project(hello_world)
 # # 开启cmake测试能力
 enable_testing()
 
+
+option(BUILD_DEBUG "是否构建调试版本" OFF)
+if(BUILD_DEBUG)
+    message(STATUS "构建调试版本")
+    add_compile_options("-g") # 添加编译选项, -g表示生成调试信息
+endif()
+
+
 # 定义项目根路径
 set(PROJECT_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
