@@ -10,6 +10,10 @@ enable_testing()
 # 定义项目根路径
 set(PROJECT_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
+# 定义项目构建路径, 该路径下会生成编译文件和可执行文件, 一般和项目根路径不同, 以免污染源代码
+set(PROJECT_BIN_DIR ${CMAKE_CURRENT_BINARY_DIR})
+message(STATUS "项目构建路径: ${PROJECT_BIN_DIR}")
+
 # 添加子目录, 参数为子目录名称, 该目录下必须有CMakeLists.txt文件
 add_subdirectory(hello)
 add_subdirectory(world)
