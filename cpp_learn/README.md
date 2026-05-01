@@ -220,7 +220,7 @@ make -j8
 
 ```sh
 
-# 列出所有缓存变量
+# 列出所有缓存变量, 例如自定义的option(BUILD_TEST, "test", OFF), 会显示BUILD_TEST的值
 cmake .. -L
 
 # 列出所有缓存变量（包含高级变量）
@@ -228,6 +228,9 @@ cmake .. -LA
 
 # 只列出调用 -L 之后新增的变量
 cmake .. -LN
+
+# 列出缓存变量以及详细信息描述
+cmake .. -LH
 
 ```
 
@@ -419,6 +422,58 @@ ctest
 ```
 
 ### 1.3.3 测试项目的编译选择
+
+- 设置编译测试选项
+```cmake
+# 根目录下的CMakeLists.txt
+
+# 添加测试选项, 参数1: 选项名称, 参数2: 选项描述, 参数3: 默认值
+# 一般自定义选线不要用CMAKE_开头, 以免和cmake内置选项冲突
+option(BUILD_TEST "是否构建测试" OFF)
+
+if(BUILD_TEST)
+    message(STATUS "构建测试")
+    # 将 test 添加到项目中, test目录下有CMakeLists.txt
+    add_subdirectory(test)
+else()
+    message(STATUS "不构建测试")
+endif()
+
+#########################################################
+# test目录下的CMakeLists.txt
+# 设置 gmock 选项为 OFF，避免编译 gmock 库，因为我们只需要 gtest 库
+set(BUILD_GMOCK OFF) # 一定要在add之前
+
+# 将 gtest 添加到项目中， 参数1: gtest所在路径, 参数2: gtest编译后输出路径（自定义）
+add_subdirectory(${PROJECT_ROOT}/thirdpart/googletest-1.17.0 googletest)
+
+```
+
+```sh
+# 指定编译选项
+cmake .. -LH -DBUILD_TEST=ON
+```
+
+### 1.3.4 单独编译gtest
+> 对于第三方库的文件，其实不用每次都去编译构建，而是下载好源码，编译之后使用即可。  
+
+```sh
+# 进入到thirdpart/googletest-1.17.0
+mkdir my_gbuild
+cd my_gbuild
+cmake .. -LH
+make
+```
+
+
+```cmake
+# 方便直接引入.h文件
+# world/CMakeLists.txt
+add_library(worldlib STATIC ${WORLD_SRC})
+
+# 添加头文件搜索路径， 只要添加了头文件搜索路径，就可以在源文件中直接使用#include "world.h"来包含头文件，而不需要指定完整路径
+target_include_directories(worldlib SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+``
 
 
 

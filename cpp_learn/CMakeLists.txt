@@ -23,11 +23,22 @@ add_executable(main main.cpp)
 
 # 添加头文件搜索路径
 # 参数1: 目标文件名称, 参数2: 访问权限, 参数3: 头文件路径
-target_include_directories(main PUBLIC world)
+# world目录下的CMakeLists.txt中已经添加了头文件搜索路径(target_include_directories(worldlib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})), 所以这里不需要再添加一次了
+# target_include_directories(main PUBLIC world)
 
 # 添加链接库, 参数1: 目标文件名称, 参数2: 访问权限, 参数3: 库名称
 target_link_libraries(main PUBLIC hellolib)
 target_link_libraries(main PUBLIC worldlib) 
 
-# 将 test 添加到项目中, test目录下有CMakeLists.txt
-add_subdirectory(test)
+# 添加测试选项, 参数1: 选项名称, 参数2: 选项描述, 参数3: 默认值
+# 一般自定义选线不要用CMAKE_开头, 以免和cmake内置选项冲突
+option(BUILD_TEST "是否构建测试" OFF)
+
+if(BUILD_TEST)
+    message(STATUS "构建测试")
+    # 将 test 添加到项目中, test目录下有CMakeLists.txt
+    add_subdirectory(test)
+else()
+    message(STATUS "不构建测试")
+endif()
+
