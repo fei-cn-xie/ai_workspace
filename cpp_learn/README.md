@@ -232,6 +232,19 @@ cmake .. -LN
 # 列出缓存变量以及详细信息描述
 cmake .. -LH
 
+
+```
+- 跨平台的编译与构建
+```sh
+##############################################
+# 配置项目，生成构建系统（如 Makefile、Ninja 等），并列出配置选项
+cmake -S./ -Bsb_build -L
+      ↑     ↑        ↑
+      │     │        └── 参数3: -L (List)
+      │     └── 参数2: -B (Build)
+      └── 参数1: -S (Source)
+# 编译项目，调用底层的构建工具（如 make、ninja、MSBuild）来实际编译代码。
+cmake --build sb_build
 ```
 
 
