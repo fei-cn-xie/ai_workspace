@@ -232,6 +232,19 @@ cmake .. -LN
 # 列出缓存变量以及详细信息描述
 cmake .. -LH
 
+
+```
+- 跨平台的编译与构建
+```sh
+##############################################
+# 配置项目，生成构建系统（如 Makefile、Ninja 等），并列出配置选项
+cmake -S./ -Bsb_build -L
+      ↑     ↑        ↑
+      │     │        └── 参数3: -L (List)
+      │     └── 参数2: -B (Build)
+      └── 参数1: -S (Source)
+# 编译项目，调用底层的构建工具（如 make、ninja、MSBuild）来实际编译代码。
+cmake --build sb_build
 ```
 
 
@@ -474,10 +487,6 @@ add_library(worldlib STATIC ${WORLD_SRC})
 # 添加头文件搜索路径， 只要添加了头文件搜索路径，就可以在源文件中直接使用#include "world.h"来包含头文件，而不需要指定完整路径
 target_include_directories(worldlib SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 ``
-
-
-
-
 
 
 
