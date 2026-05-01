@@ -486,8 +486,9 @@ add_library(worldlib STATIC ${WORLD_SRC})
 
 # 添加头文件搜索路径， 只要添加了头文件搜索路径，就可以在源文件中直接使用#include "world.h"来包含头文件，而不需要指定完整路径
 target_include_directories(worldlib SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-``
+```
 
+> 从零开始搭建c/c++工程完结
 
 
 
