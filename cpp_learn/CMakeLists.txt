@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.16.3)
 # 定义项目名称, 一般和项目文件夹名称一致
 project(hello_world)
 
-# # 开启测试
-# enable_testing()
+# # 开启cmake测试能力
+enable_testing()
 
 # 定义项目根路径
 set(PROJECT_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
@@ -29,5 +29,5 @@ target_include_directories(main PUBLIC world)
 target_link_libraries(main PUBLIC hellolib)
 target_link_libraries(main PUBLIC worldlib) 
 
-# 将 gtest 添加到项目中
+# 将 test 添加到项目中, test目录下有CMakeLists.txt
 add_subdirectory(test)

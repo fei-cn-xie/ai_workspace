@@ -213,6 +213,25 @@ make
 # make VERBOSE=1 #编译时生成详细信息
 ```
 
+```sh
+# 开启多个线程编译， 8表示开启8个线程
+make -j8
+```
+
+```sh
+
+# 列出所有缓存变量
+cmake .. -L
+
+# 列出所有缓存变量（包含高级变量）
+cmake .. -LA
+
+# 只列出调用 -L 之后新增的变量
+cmake .. -LN
+
+```
+
+
 ### 1.2.3 阶段3：使用分级cmake项目
 
 ```sh
@@ -361,6 +380,47 @@ make test
 # 找到cpp_learn/build/test/test_hello.exe文件执行 
 ./test/test_hello.exe
 ```
+
+### 1.3.2 多个测试工程
+
+> 如果只使用上一小节的方式三，当工程项目很多，项目内模块很多，我们对某个模块测试时却需要对整个测试项目编译和执行，极不方便  
+> 因此使用方式一或方式二，可实现对多个测试项目进行编译和管理
+
+`CMakeLists.txt`中开启ctest
+
+```cmake
+# 项目根目录下的CMakeLists.txt
+# # 开启cmake测试能力
+enable_testing()
+
+# # 将 test 添加到项目中, test目录下有CMakeLists.txt
+add_subdirectory(test)
+
+##################################################
+# 测试工程test文件夹下的CMakeLists.txt
+# 添加测试, 参数1: 测试名称, 参数2: 测试命令
+add_test(NAME test_hello COMMAND test_hello)
+
+# 添加测试, 参数1: 测试名称, 参数2: 测试命令
+add_test(NAME test_world COMMAND test_world)
+
+```
+
+```sh
+# build目录下
+cmake ..
+make -j8
+
+#执行测试
+ctest
+
+# 测试详细日志在cpp_learn\build\Testing\Temporary\LastTest.log
+
+```
+
+### 1.3.3 测试项目的编译选择
+
+
 
 
 
