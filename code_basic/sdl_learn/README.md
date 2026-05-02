@@ -36,7 +36,104 @@ tar -zxf SDL-release-3.4.8.tar.gz
 cd SDL-release-3.4.8/
 mkdir build
 cd build
-cmake .. -L -G"MSYS Makefiles"
+cmake .. -L -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=`pwd`/install
+
+# 编译
 make -j16
 
+# 安装
+make install
+
 ```
+
+```sh
+# 通过编译测试，运行测试内容
+cmake .. -L -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=`pwd`/install -DSDL_TESTS=ON
+
+```
+
+## 1.3 helloworld
+
+### 1.3.1 定义cpp文件
+```cpp
+#include <iostream>
+#include <SDL.h>
+#include <chrono>
+#include <thread>
+
+constexpr int gWindowWidth = 800;
+constexpr int gWindowHeight = 600;
+
+int main(int argc, char* argv[]) {
+    // 初始化 SDL 视频子系统
+    SDL_Init(SDL_INIT_VIDEO);
+
+    // 创建一个 SDL 窗口
+    SDL_Window *window = SDL_CreateWindow("Hello SDL2", 
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, gWindowWidth, gWindowHeight, 0);
+    
+    // 等待 2 秒钟
+    std::chrono::milliseconds ms(2000);
+    std::this_thread::sleep_for(ms);
+
+    // 销毁窗口并退出 SDL
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
+```
+
+### 1.3.2 定义CMakeLists.txt
+
+```cmake
+cmake_minimum_required(VERSION 3.16.3)
+project(sdl_learn)
+
+enable_testing()
+
+option(BUILD_DEBUG "Build Debug" OFF)
+if(BUILD_DEBUG)
+    add_compile_options("-g")
+endif()
+
+set(SDL_LEARN_PROJECT_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
+set(SDL_LEARN_BIN_ROOT ${CMAKE_CURRENT_BINARY_DIR})
+
+add_executable(sdl_learn
+    ${CMAKE_CURRENT_SOURCE_DIR}/hello_SDL2.cpp
+)
+
+find_package(SDL2)
+
+if(${SDL2_FOUND})
+    message(STATUS "SDL2 found: ${SDL2_INCLUDE_DIRS}")
+    message(STATUS "SDL2 libraries: ${SDL2_STATIC_LIBRARIES}")
+    target_include_directories(sdl_learn PUBLIC ${SDL2_INCLUDE_DIRS})
+    target_link_libraries(sdl_learn PUBLIC ${SDL2_STATIC_LIBRARIES})
+else()
+    message(STATUS "SDL2 not found, building from source" )
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/SDL-release-2.28.3)
+    target_link_libraries(sdl_learn PUBLIC SDL2::SDL2-static SDL2::SDL2main)
+endif()
+
+
+# 设置编译测试选项
+
+option(BUILD_TESTS "Build Tests" OFF)
+if(BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
+```
+
+
+### 1.3.3 编译执行
+```sh
+mkdir build
+cd build
+cmake .. -LH -G"MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=d/Users/fei/workspace/code_basic/sdl_learn/lib/SDL-release-2.28.3/build/install
+
+make -j64
+
+```
+
