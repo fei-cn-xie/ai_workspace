@@ -15,8 +15,20 @@ int main(int argc, char* argv[]) {
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, gWindowWidth, gWindowHeight, 0);
     
     // 等待 2 秒钟
-    std::chrono::milliseconds ms(2000);
-    std::this_thread::sleep_for(ms);
+    // std::chrono::milliseconds ms(2000);
+    // std::this_thread::sleep_for(ms);
+
+    bool quit = false;
+    SDL_Event event;
+    while (!quit) {
+        // 处理事件
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = true;
+            }
+        }
+    }
+
 
     // 销毁窗口并退出 SDL
     SDL_DestroyWindow(window);
