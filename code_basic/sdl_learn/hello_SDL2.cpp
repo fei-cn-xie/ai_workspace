@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
 
     // 创建一个 SDL 窗口
     SDL_Window *window = SDL_CreateWindow("Hello SDL2", 
-        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, gWindowWidth, gWindowHeight, 0);
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, gWindowWidth, gWindowHeight, SDL_WINDOW_RESIZABLE);
     
     // 等待 2 秒钟
     // std::chrono::milliseconds ms(2000);
@@ -22,10 +22,16 @@ int main(int argc, char* argv[]) {
     SDL_Event event;
     while (!quit) {
         // 处理事件
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
+        SDL_PollEvent(&event);
+        // if (event.type == SDL_QUIT) {
+        //     quit = true;
+        // }
+        switch (event.type) {
+            case SDL_QUIT:
                 quit = true;
-            }
+                break;
+            default:
+                break;
         }
     }
 
